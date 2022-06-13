@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/sys113/search-filter/main/screenshot.png" style="border-radius:20px">
+  <img src="https://raw.githubusercontent.com/sys113/search-filter/master/screenshot.png" style="border-radius:20px">
 </div>
 
 ---
