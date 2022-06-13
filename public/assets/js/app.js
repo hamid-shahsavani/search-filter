@@ -8,10 +8,20 @@ function $(e) {
 }
 
 //! for add product to dom
-function addProductToDom(products){
-  if(products.length === 0) {
+function addProductToDom(type,products){
+
+  // dom loaded and add all product to dom
+  if((products.length === 0) && (type === 'category')) {
     products = data;
   }
+
+  // product title not found reset product dom
+  if((products.length === 0) && (type === 'input')) {
+    $('#products')[0].innerHTML = '';
+    return
+  }
+
+  // add product to dom
   let html = '';
   products.forEach(p => {
     html += `<div class="card w-[350px] card-bordered lg:w-full h-[400px] bg-base-100 shadow-xl">
@@ -30,7 +40,7 @@ function addProductToDom(products){
 }
 
 //* add all product to dom
-addProductToDom([]);
+addProductToDom('category',[]);
 
 //* filter product with category
 const select = Array.from($('.tabs > a'));
@@ -43,7 +53,7 @@ const click = (e) => {
   const filterCategoy = data.filter((e)=>{
     return e.category == category;
   });
-  addProductToDom(filterCategoy);
+  addProductToDom('category',filterCategoy);
 }
 select.forEach(i => {
   i.addEventListener('click', click)
@@ -51,6 +61,7 @@ select.forEach(i => {
 
 //* filter product with input value
 $('#input')[0].addEventListener('input', (e)=> {
+
   const inputVaule = e.currentTarget.value;
   
   // filter tab active products
@@ -62,10 +73,10 @@ $('#input')[0].addEventListener('input', (e)=> {
   });
 
   // filter product with input value 
-  const filterTitle = filterCategoy.filter((e)=>{
+  let filterTitle = filterCategoy.filter((e)=>{
     return e.title.indexOf(inputVaule) !== -1;
   });
 
   // add to dom 
-  addProductToDom(filterTitle);
+  addProductToDom('input',filterTitle);
 });
